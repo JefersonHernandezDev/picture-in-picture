@@ -1,34 +1,46 @@
 package com.reactnativepictureinpicture;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
-import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.module.annotations.ReactModule;
+import com.facebook.react.bridge.LifecycleEventListener;
+import android.os.Build;
 
 @ReactModule(name = PictureInPictureModule.NAME)
-public class PictureInPictureModule extends ReactContextBaseJavaModule {
-    public static final String NAME = "PictureInPicture";
+public class PictureInPictureModule extends ReactContextBaseJavaModule implements LifecycleEventListener {
+  public static final String NAME = "PictureInPicture";
 
-    public PictureInPictureModule(ReactApplicationContext reactContext) {
-        super(reactContext);
-    }
+  public PictureInPictureModule(ReactApplicationContext reactContext) {
+    super(reactContext);
+  }
 
-    @Override
-    @NonNull
-    public String getName() {
-        return NAME;
-    }
+  @Override
+  @NonNull
+  public String getName() {
+    return NAME;
+  }
 
 
-    // Example method
-    // See https://reactnative.dev/docs/native-modules-android
-    @ReactMethod
-    public void multiply(int a, int b, Promise promise) {
-        promise.resolve(a * b);
-    }
+  @RequiresApi(api = Build.VERSION_CODES.N)
+  @ReactMethod
+  public void enterPictureInPictureMode() {
+    getCurrentActivity().enterPictureInPictureMode();
+  }
 
-    public static native int nativeMultiply(int a, int b);
+
+  @Override
+  public void onHostResume() {
+  }
+
+  @Override
+  public void onHostPause() {
+  }
+
+  @Override
+  public void onHostDestroy() {
+  }
 }

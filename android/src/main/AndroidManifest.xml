@@ -1,4 +1,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.reactnativepictureinpicture">
+  package="com.reactnativepictureinpicture">
 
+  <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+  <application android:name="com.reactnativepictureinpicture.PictureInPicturePackage">
+    <activity
+      android:name=".PictureInPicturePackage"
+      android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+      android:launchMode="singleTask"
+      android:supportsPictureInPicture="true"
+      android:windowSoftInputMode="adjustResize">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+  </application>
 </manifest>
